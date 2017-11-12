@@ -1,0 +1,72 @@
+<resources>
+    <string name="hello_world">Hello world!</string>
+    <string name="app_name">SMSDecrypt</string>
+    <!--<string name="action_settings">Settings</string>-->
+    <string name="type_message">Type message</string>
+    <string name="title_activity_smsnotification">SMSNotificationActivity</string>
+    <string-array name="ufs">
+        <item />
+        <item>Acre</item>
+        <item>Alagoas</item>
+        <item>Amazonas</item>
+        <item>Amapá</item>
+        <item>Bahia</item>
+        <item>Ceará</item>
+        <item>Distrito Federal</item>
+        <item>Espírito Santo</item>
+        <item>Goiás</item>
+        <item>Maranhão</item>
+        <item>Minas Gerais</item>
+        <item>Mato Grosso do Sul</item>
+        <item>Mato Grosso</item>
+        <item>Paraíba</item>
+        <item>Paraíba</item>
+        <item>Pernambuco</item>
+        <item>Piauí</item>
+        <item>Paraná</item>
+        <item>Rio de Janeiro</item>
+        <item>Rio Grande do Norte</item>
+        <item>Rondônia</item>
+        <item>Roraima</item>
+        <item>Rio Grande do Sul</item>
+        <item>Santa Catarina</item>
+        <item>Sergipe</item>
+        <item>São Paulo</item>
+        <item>Tocantins</item>
+    </string-array>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="sign_in_facebook">Facebook</string>
+    <string name="sign_in_googleplus">Google+</string>
+    <string name="sign_in_linkedin">LinkedIn</string>
+    <string name="welcome">Welcome to Native</string>
+    <string name="sign_in_with">Sign In With:</string>
+
+    <!-- My Profile and Contact screen -->
+    <string name="hint_faculty">Attended Hopkins University 1979-1984</string>
+    <string name="hint_employment">Head of Diagnostic @ PPT Hospital</string>
+    <string name="hint_interests">Chemistry,  Piano , Guitar, Android, Economy, Football...</string>
+    <string name="hint_knowledgeable">Classical Music,  Fitness, Movie Trivia, HTML5, Android, JavaScript...</string>
+    <string name="hint_goals">Learn Ionic2, Find a team for basketball...</string>
+    <string name="title_activity_chat">ChatActivity</string>
+
+    <!-- Chat Activity -->
+    <string name="typeMessage">Type to compose</string>
+</resources>

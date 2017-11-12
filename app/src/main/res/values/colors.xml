@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="primary">#E43F3F</color>
+  <color name="primary_dark">#E12929</color>
+  <color name="primary_darker">#CC1D1D</color>
+  <color name="accent">#FFFFFF</color>
+
+  <color name="black">#000000</color>
+  <color name="jet">#222222</color>
+  <color name="oil">#333333</color>
+  <color name="monsoon">#777777</color>
+  <color name="jumbo">#888888</color>
+  <color name="aluminum">#999999</color>
+  <color name="base">#AAAAAA</color>
+  <color name="iron">#CCCCCC</color>
+  <color name="white">#FFFFFF</color>
+
+  <!--<color name="colorPrimary">#3F51B5</color>
+  <color name="colorPrimaryDark">#303F9F</color>
+  <color name="colorAccent">#FF4081</color>-->
+  
+    <color name="colorPrimary">#2196f3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorAccent">#FF5722</color><!--colorSecondary in Ionic -->
+    <color name="colorLight">#BBDEFB</color>
+    <color name="colorTextIcons">#FFFFFF</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#727272</color>
+    <color name="colorDivider">#B6B6B6</color>
+    <color name="colorBackground">#fafafa</color>
+
+    <color name="colorDanger">#f53d3d</color>
+    <color name="colorDark">#222</color>
+    <color name="colorFavorite">#69BB7B</color>
+
+    <color name="facebook">#3b5998</color>
+    <color name="googleplus">#dc4e41</color>
+    <color name="linkedin">#0077b5</color>
+
+  <integer-array name="contacts_text_background_colors">
+    <item>0xFF9C27B0</item>
+    <item>0xFFFF5722</item>
+    <item>0xFF3F51B5</item>
+    <item>0xFFDB4437</item>
+    <item>0xFFEF6C00</item>
+    <item>0xFF689F38</item>
+    <item>0xFF757575</item>
+    <item>0xFF0F9D58</item>
+    <item>0xFF3F51B5</item>
+    <item>0xFF0097A7</item>
+  </integer-array>
+  <!--++++++++++++++++++++-->
+  <!--listview item colors-->
+  <!--++++++++++++++++++++-->
+  <color name="listview_pressed">#FFdddddd</color>
+  <color name="listview_focused">#FF7dbcd3</color>
+  <color name="listview_checked">#FFededed</color>
+
+  <color name="pinned_header_text">#FF3c3c3c</color>
+</resources>
