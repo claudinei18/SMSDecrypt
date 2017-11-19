@@ -371,9 +371,18 @@ public class ListSmsFragment extends BaseNavigationFragment {
                     }else{
                         msg.setMe(false);
                     }
+                    long a = 0;
                     try{
-                        msg.setMessage(new EncriptaDecriptaRSA().decriptografaPub(strbody));
+                        a = System.currentTimeMillis();
+                        String msgg = new EncriptaDecriptaRSA().decriptografaPub(strbody);
+                        long c = System.currentTimeMillis();
+                        System.out.println(c - a);
+                        System.out.println("Acima está tempo de descriptografia com sucesso Tamanho trafegada " + strbody.length() + " verdade " + msgg.length() );
+                        msg.setMessage(msgg);
                     }catch (Exception e){
+                        long c = System.currentTimeMillis();
+                        System.out.println(c - a);
+                        System.out.println("Acima está tempo de descriptografia sem sucesso");
                         msg.setMessage("Mensagem não descriptografada!");
                     }
                     msg.setDate(DateFormat.getDateTimeInstance().format(longDate));
@@ -453,7 +462,13 @@ public class ListSmsFragment extends BaseNavigationFragment {
 
                 String mensagemCriptografada = "";
                 message = txtMessage.getText().toString();
+                long a = System.currentTimeMillis();
+
                 mensagemCriptografada = new EncriptaDecriptaRSA().criptografaPub(message, new EncriptaDecriptaRSA().stringToPublicKey(jsonObject.getJSONArray("content").getJSONObject(0).getString("chavePublica")));
+
+                long b = System.currentTimeMillis();
+                System.out.println(b - a);
+                System.out.println("Acima está tempo de criptografia");
 
                 System.out.println("SENDING DUAL SIM");
 

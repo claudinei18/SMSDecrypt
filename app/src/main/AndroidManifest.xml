@@ -46,12 +46,17 @@
         <activity
             android:name=".ForgotPasswordActivity"
             android:theme="@style/AppTheme.Dark" />
-        <activity android:name=".SendVerificationCode" />
+
+        <activity android:name=".SendVerificationCode"
+            android:theme="@style/AppTheme.Dark" />
+
         <activity android:name=".ActivityMessageList"
             android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".ChatActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
         <activity
             android:name=".NavigationActivity"
             android:label="@string/app_name"

@@ -7,6 +7,7 @@ package com.tcc.smsdecrypt.requisicoes;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -107,8 +108,10 @@ public class CallAPIRegistration extends AsyncTask<String, String, String> {
 
 
             if (c.getResponseCode() == 200) {
+                Toast.makeText(this.context, "Register successed!", Toast.LENGTH_LONG).show();
                 return "true";
             } else {
+                Toast.makeText(this.context, "Register failed!", Toast.LENGTH_LONG).show();
                 return "false";
             }
 

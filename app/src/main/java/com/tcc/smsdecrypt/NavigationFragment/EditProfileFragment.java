@@ -1,9 +1,11 @@
 package com.tcc.smsdecrypt.NavigationFragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,7 +111,7 @@ public class EditProfileFragment extends BaseNavigationFragment {
                     final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
                             R.style.AppTheme_Dark_Dialog);
                     progressDialog.setIndeterminate(true);
-                    progressDialog.setMessage("Creating Account...");
+                    progressDialog.setMessage("Updating Account...");
                     progressDialog.show();
                     new android.os.Handler().postDelayed(
                             new Runnable() {
@@ -128,15 +130,16 @@ public class EditProfileFragment extends BaseNavigationFragment {
                     String estado = _addressTextEstado.getText().toString();
                     String email = _emailText.getText().toString();
                     String mobile = _mobileText.getText().toString();
-                    String password = _passwordText.getText().toString();
-                    String reEnterPassword = _reEnterPasswordText.getText().toString();
+                    /*String password = _passwordText.getText().toString();
+                    String reEnterPassword = _reEnterPasswordText.getText().toString();*/
 
                     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-                    UserRegistrate user = new UserRegistrate(LoginActivity.codigoPessoaUsuarioLogado, name, email, mobile, encoder.encode(password), logradouro, numero, complemento, bairro, cep, cidade, estado, true);
+                    UserRegistrate user = new UserRegistrate(LoginActivity.codigoPessoaUsuarioLogado, name, email, mobile, "", logradouro, numero, complemento, bairro, cep, cidade, estado, true);
 
                     CallAPIUpdateRegister c = new CallAPIUpdateRegister(getActivity(), user);
                     c.execute();
 
+                    _updateProfile.setEnabled(true);
 
                 }
             }
@@ -158,11 +161,11 @@ public class EditProfileFragment extends BaseNavigationFragment {
         String email = _emailText.getText().toString();
         String mobile = _mobileText.getText().toString();
 
-        _passwordText = (EditText) getActivity().findViewById(R.id.input_password);
+        /*_passwordText = (EditText) getActivity().findViewById(R.id.input_password);
         String password = _passwordText.getText().toString();
 
         _reEnterPasswordText = (EditText) getActivity().findViewById(R.id.input_reEnterPassword);
-        String reEnterPassword = _reEnterPasswordText.getText().toString();
+        String reEnterPassword = _reEnterPasswordText.getText().toString();*/
 
         if (name.isEmpty() || name.length() < 3) {
             _nameText.setError("at least 3 characters");
@@ -193,7 +196,7 @@ public class EditProfileFragment extends BaseNavigationFragment {
             _mobileText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+        /*if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
             _passwordText.setError("between 4 and 10 alphanumeric characters");
             valid = false;
         } else {
@@ -205,7 +208,7 @@ public class EditProfileFragment extends BaseNavigationFragment {
             valid = false;
         } else {
             _reEnterPasswordText.setError(null);
-        }
+        }*/
 
         return valid;
     }
