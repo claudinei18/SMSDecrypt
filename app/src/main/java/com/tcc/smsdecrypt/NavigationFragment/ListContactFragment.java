@@ -25,7 +25,10 @@ import android.widget.Toast;
 import com.tcc.smsdecrypt.ContactAdapter;
 import com.tcc.smsdecrypt.R;
 
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -133,8 +136,8 @@ public class ListContactFragment extends BaseNavigationFragment {
 
     public void readContacts(){
 
-        Uri uri = Uri.parse("content://sms/inbox");
-        Cursor c = getActivity().getContentResolver().query(uri, null, null, null, null);
+        Uri uri = Uri.parse("content://sms/");
+        Cursor c = getActivity().getContentResolver().query(uri, null, null, null, "date DESC");
 
         HashMap<String, String> hashMap = new HashMap<>();
 
@@ -142,23 +145,31 @@ public class ListContactFragment extends BaseNavigationFragment {
 
         if (c.moveToFirst()) {
             for (int i = 0; i < c.getCount(); i++) {
-
                 String phoneNumber = c.getString(c.getColumnIndexOrThrow("address"));
+                if(!hashMap.containsKey(phoneNumber)){
+                    String date = c.getString(c.getColumnIndexOrThrow("date"));
 
-                hashMap.put(phoneNumber, "celular");
+                    SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    Date date2 = new Date(Long.parseLong(date));
 
+                    Contact contact = new Contact("" + i, phoneNumber);
+                    contact.addNumber(date2.toString(), "celular");
+                    listContacts.add(contact);
+
+                    hashMap.put(phoneNumber, "celular");
+                }
                 c.moveToNext();
             }
         }
         c.close();
 
-        int i = 0;
+        /*int i = 0;
         for (Map.Entry<String, String> entry : hashMap.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
             Contact contact = new Contact("" + i++, key);
             listContacts.add(contact);
-        }
+        }*/
 
 
         lvContacts = (ListView) getActivity().findViewById(R.id.lvContacts);

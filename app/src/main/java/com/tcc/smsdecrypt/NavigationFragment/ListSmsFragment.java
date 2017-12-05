@@ -1,6 +1,7 @@
 package com.tcc.smsdecrypt.NavigationFragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -49,6 +50,11 @@ import java.net.Authenticator;
 import java.net.HttpURLConnection;
 import java.net.PasswordAuthentication;
 import java.net.URL;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +63,7 @@ import java.util.List;
  * Created by claudinei on 13/10/17.
  */
 
+@SuppressLint("ValidFragment")
 public class ListSmsFragment extends BaseNavigationFragment {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_MESSAGES = 0;
@@ -310,7 +317,12 @@ public class ListSmsFragment extends BaseNavigationFragment {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendSMSMessage();
+                try{
+                    sendSMSMessage();
+                }catch (Exception e){
+                    Toast.makeText(getActivity().getApplicationContext(), "Verifique se esse usuário já se registrou e gerou sua chave!",
+                            Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -368,13 +380,23 @@ public class ListSmsFragment extends BaseNavigationFragment {
 
                     if(int_Type == 2){
                         msg.setMe(true);
-                    }else{
+                    }else if(strbody.startsWith("ONLY-TO-SHOW")){
                         msg.setMe(false);
                     }
                     long a = 0;
                     try{
+                        String msgg;
+                        if(strbody.startsWith("ONLY-TO-SHOW")){
+                            msgg = strbody.split("ONLY-TO-SHOW")[1];
+                            msgg = new EncriptaDecriptaRSA().decriptaOnlyToShow(msgg);
+
+                        }else{
+                            msgg = new EncriptaDecriptaRSA().decriptografaPub(strbody);
+                            CharsetDecoder UTF8Decoder =
+                                    Charset.forName("UTF8").newDecoder().onMalformedInput(CodingErrorAction.REPORT).onUnmappableCharacter(CodingErrorAction.REPORT);
+                            UTF8Decoder.decode(ByteBuffer.wrap(msgg.getBytes(StandardCharsets.UTF_8)));
+                        }
                         a = System.currentTimeMillis();
-                        String msgg = new EncriptaDecriptaRSA().decriptografaPub(strbody);
                         long c = System.currentTimeMillis();
                         System.out.println(c - a);
                         System.out.println("Acima está tempo de descriptografia com sucesso Tamanho trafegada " + strbody.length() + " verdade " + msgg.length() );
@@ -466,6 +488,12 @@ public class ListSmsFragment extends BaseNavigationFragment {
 
                 mensagemCriptografada = new EncriptaDecriptaRSA().criptografaPub(message, new EncriptaDecriptaRSA().stringToPublicKey(jsonObject.getJSONArray("content").getJSONObject(0).getString("chavePublica")));
 
+                String mensagemParaMostrar = "ONLY-TO-SHOW" + new EncriptaDecriptaRSA().encriptaOnlyToShow(message);
+                SmsManager sms = SmsManager.getDefault();
+                ArrayList<String> parts = sms.divideMessage(mensagemParaMostrar);
+                sms.sendMultipartTextMessage(phoneNumber, null, parts, null, null);
+
+
                 long b = System.currentTimeMillis();
                 System.out.println(b - a);
                 System.out.println("Acima está tempo de criptografia");
@@ -486,8 +514,8 @@ public class ListSmsFragment extends BaseNavigationFragment {
                     System.out.println("I: " + i);
                 }
 
-                SmsManager sms = SmsManager.getDefault();
-                ArrayList<String> parts = sms.divideMessage(mensagemCriptografada);
+                sms = SmsManager.getDefault();
+                parts = sms.divideMessage(mensagemCriptografada);
                 sms.sendMultipartTextMessage(phoneNumber, null, parts, null, null);
 
 

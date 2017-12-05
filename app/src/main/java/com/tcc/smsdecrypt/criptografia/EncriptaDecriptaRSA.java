@@ -15,6 +15,7 @@ import com.tcc.smsdecrypt.database.ChavesDbHelper;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -402,6 +403,54 @@ public class EncriptaDecriptaRSA extends AppCompatActivity {
         final String textoPuro = decriptografa(arrayParaDecript, chavePrivada);
 
         return textoPuro;
+    }
+
+    public String encriptaOnlyToShow(String mensagem){
+        try{
+            ObjectInputStream inputStream = null;
+
+            // Criptografa a Mensagem usando a Chave Pública
+            inputStream = new ObjectInputStream(new FileInputStream(PATH_CHAVE_PUBLICA));
+            final PublicKey chavePublica = (PublicKey) inputStream.readObject();
+            return criptografaPub(mensagem, chavePublica);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String decriptaOnlyToShow(String mensagem){
+        try{
+            ObjectInputStream inputStream = null;
+
+            String[] texto = mensagem.split(",");
+            byte[] arrayParaDecript = new byte[texto.length];
+            for(int k = 0; k < texto.length; k++){
+                String aa = texto[k].replaceAll(" ", "");
+                aa = aa.replaceAll("\\[", "");
+                aa = aa.replaceAll("\\]", "");
+
+                arrayParaDecript[k] = Byte.parseByte(aa);
+
+            }
+
+            // Criptografa a Mensagem usando a Chave Pública
+            inputStream = new ObjectInputStream(new FileInputStream(PATH_CHAVE_PRIVADA));
+            final PrivateKey chavePrivada = (PrivateKey) inputStream.readObject();
+            final String textoPuro = decriptografa(arrayParaDecript, chavePrivada);
+            return textoPuro;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**

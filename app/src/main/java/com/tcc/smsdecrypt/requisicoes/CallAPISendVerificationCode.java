@@ -101,7 +101,7 @@ public class CallAPISendVerificationCode extends AsyncTask<String, String, Strin
                     handler =  new Handler(context.getMainLooper());
                     handler.post( new Runnable(){
                         public void run(){
-                            Toast.makeText(context, "E-mail enviado! Favor olhar sua caixa de mensagens! ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Senha atualizada com sucesso! ", Toast.LENGTH_LONG).show();
                         }
                     });
                     return ""+true;
@@ -109,7 +109,7 @@ public class CallAPISendVerificationCode extends AsyncTask<String, String, Strin
                     handler =  new Handler(context.getMainLooper());
                     handler.post( new Runnable(){
                         public void run(){
-                            Toast.makeText(context, "E-mail não enviado! Favor verifique se o e-mail está correto e tente novamente!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Erro ao atualizar senha! Verifique seu código e seu email e tente novamente em alguns segundos!", Toast.LENGTH_LONG).show();
                         }
                     });
                     return ""+false;

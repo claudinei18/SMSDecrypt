@@ -54,7 +54,7 @@ public class SignupActivity extends AppCompatActivity {
     Button _signupButton;
     @Bind(R.id.link_login)
     TextView _loginLink;
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +85,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Finish the registration screen and return to the Login activity
-                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
@@ -150,13 +150,11 @@ public class SignupActivity extends AppCompatActivity {
         setResult(RESULT_OK, null);
         Toast.makeText(getBaseContext(), "Signup success", Toast.LENGTH_LONG).show();
         finish();
-        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
     }
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Signup failed", Toast.LENGTH_LONG).show();
-
         _signupButton.setEnabled(true);
     }
 
@@ -192,7 +190,7 @@ public class SignupActivity extends AppCompatActivity {
             _emailText.setError(null);
         }
 
-        if (mobile.isEmpty() || mobile.length()<16) {
+        if (mobile.isEmpty() || mobile.length() < 16) {
             _mobileText.setError("Enter Valid Mobile Number");
             valid = false;
         } else {
@@ -216,7 +214,7 @@ public class SignupActivity extends AppCompatActivity {
         return valid;
     }
 
-    public boolean enviarDadosUsuarioServidor(){
+    public boolean enviarDadosUsuarioServidor() {
         String name = _nameText.getText().toString();
         String logradouro = _addressTextLogradouro.getText().toString();
         String numero = _addressTextNumero.getText().toString();
@@ -235,15 +233,12 @@ public class SignupActivity extends AppCompatActivity {
         UserRegistrate user = new UserRegistrate("", name, email, mobile, encoder.encode(password), logradouro, numero, complemento, bairro, cep, cidade, estado, true);
 
         CallAPIRegistration c = new CallAPIRegistration(getBaseContext(), user);
+        c.execute();
 
 
-        if (c.execute().equals("true")) {
-            onSignupSuccess();
-            return true;
-        } else {
-            onSignupFailed();
-            return false;
-        }
+        onSignupFailed();
+
+        return true;
 
         /*try{
             HttpURLConnection c = null;

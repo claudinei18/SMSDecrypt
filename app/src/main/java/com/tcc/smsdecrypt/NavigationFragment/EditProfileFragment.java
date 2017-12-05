@@ -136,7 +136,7 @@ public class EditProfileFragment extends BaseNavigationFragment {
                     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
                     UserRegistrate user = new UserRegistrate(LoginActivity.codigoPessoaUsuarioLogado, name, email, mobile, "", logradouro, numero, complemento, bairro, cep, cidade, estado, true);
 
-                    CallAPIUpdateRegister c = new CallAPIUpdateRegister(getActivity(), user);
+                    CallAPIUpdateRegister c = new CallAPIUpdateRegister(getActivity().getBaseContext(), user);
                     c.execute();
 
                     _updateProfile.setEnabled(true);

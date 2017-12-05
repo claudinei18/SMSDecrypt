@@ -6,6 +6,7 @@ package com.tcc.smsdecrypt.requisicoes;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.widget.Toast;
 
@@ -51,6 +52,7 @@ public class CallAPIUpdateRegister extends AsyncTask<String, String, String> {
     protected String doInBackground(String... params) {
 
         try{
+            Handler handler =  new Handler(context.getMainLooper());
 
             ChavesDbHelper db = new ChavesDbHelper(context);
             String tokenAccess = db.getAccessToken(LoginActivity.emailUsuarioLogado);
@@ -117,10 +119,20 @@ public class CallAPIUpdateRegister extends AsyncTask<String, String, String> {
 
 
             if (c.getResponseCode() == 200) {
-                Toast.makeText(this.context, "Update sucess!", Toast.LENGTH_LONG).show();
+                handler =  new Handler(context.getMainLooper());
+                handler.post( new Runnable(){
+                    public void run(){
+                        Toast.makeText(context, "Update success!", Toast.LENGTH_LONG).show();
+                    }
+                });
                 return "true";
             } else {
-                Toast.makeText(this.context, "Update failed!", Toast.LENGTH_LONG).show();
+                handler =  new Handler(context.getMainLooper());
+                handler.post( new Runnable(){
+                    public void run(){
+                        Toast.makeText(context, "Update success!", Toast.LENGTH_LONG).show();
+                    }
+                });
                 return "false";
             }
 

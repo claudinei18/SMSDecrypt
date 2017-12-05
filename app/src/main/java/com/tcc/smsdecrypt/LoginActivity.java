@@ -194,7 +194,9 @@ public class LoginActivity extends AppCompatActivity {
 
     public void continueLogin(){
         try{
+            System.out.println(c.getResponseCode());
             if (c.getResponseCode() == 200) {
+                System.out.println(c.getResponseCode());
 
                 if(cb.isChecked()){
                     SharedPreferences sp=getSharedPreferences("Login", MODE_PRIVATE);
@@ -227,8 +229,8 @@ public class LoginActivity extends AppCompatActivity {
                             /*
                             * Se o IMEI for correto
                             */
-                TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-                System.out.println(telephonyManager.getDeviceId());
+                /*TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+                System.out.println(telephonyManager.getDeviceId());*/
 
                 Token t = new Token(_emailText.getText().toString(), jsonObject.getString("access_token"), getRefreshToken());
                 ChavesDbHelper db = new ChavesDbHelper(getApplicationContext());
